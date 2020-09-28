@@ -11,6 +11,7 @@ var fixation = {
 
 var timeline = [];
 
+var trial_count = 1;
 
 
 
@@ -99,7 +100,7 @@ var testNonWord = {
       stimulus: '<p class="stimulus">+</p>',
       choices: jsPsych.NO_KEYS,
       trial_duration: 500,
-      post_trial_gap: 0
+      post_trial_gap: 0,
     },
     {
       type: 'html-keyboard-response',
@@ -160,7 +161,6 @@ var testNonWord2 = {
     }
   ]
 }
-
 
 
 
@@ -347,6 +347,79 @@ timeline.push(practiceEnd)
 
 
 
+var randomNum = Math.random;
+if(randomNum>.75){
+  var stimuliSpeed = [
+    {word: 'happy', word_validity: 'valid', word_frequency: 'high'},
+    {word: 'halpy', word_validity: 'invalid', word_frequency: undefined},
+    {word: 'perky', word_validity: 'valid', word_frequency: 'low'},
+    {word: 'perkn', word_validity: 'invalid', word_frequency: undefined},
+  ];
+
+  var stimuliAccuracy = [
+    {word: 'candy', word_validity: 'valid', word_frequency: 'high'},
+    {word: 'caxdy', word_validity: 'invalid', word_frequency: 'undefined'},
+    {word: 'hippo', word_validity: 'valid', word_frequency: 'low'},
+    {word: 'hitpo', word_validity: 'invalid', word_frequency: undefined},
+  ];
+}
+
+
+else if(randomNum<.75 && randomNum>.50){
+  var stimuliSpeed = [
+    {word: 'happy', word_validity: 'valid', word_frequency: 'high'},
+    {word: 'halpy', word_validity: 'invalid', word_frequency: undefined},
+    {word: 'hippo', word_validity: 'valid', word_frequency: 'low'},
+    {word: 'hitpo', word_validity: 'invalid', word_frequency: undefined},
+  ];
+
+  var stimuliAccuracy = [
+    {word: 'candy', word_validity: 'valid', word_frequency: 'high'},
+    {word: 'caxdy', word_validity: 'invalid', word_frequency: 'undefined'},
+    {word: 'perky', word_validity: 'valid', word_frequency: 'low'},
+    {word: 'perkn', word_validity: 'invalid', word_frequency: undefined},
+  ];
+}
+
+
+
+else if(randomNum<.50 && randomNum>.25){
+  var stimuliSpeed = [
+    {word: 'candy', word_validity: 'valid', word_frequency: 'high'},
+    {word: 'caxdy', word_validity: 'invalid', word_frequency: 'undefined'},
+    {word: 'perky', word_validity: 'valid', word_frequency: 'low'},
+    {word: 'perkn', word_validity: 'invalid', word_frequency: undefined},
+  ];
+
+  var stimuliAccuracy = [
+    {word: 'happy', word_validity: 'valid', word_frequency: 'high'},
+    {word: 'halpy', word_validity: 'invalid', word_frequency: undefined},
+    {word: 'hippo', word_validity: 'valid', word_frequency: 'low'},
+    {word: 'hitpo', word_validity: 'invalid', word_frequency: undefined},
+  ];
+}
+
+
+
+
+else{
+  var stimuliSpeed = [
+    {word: 'candy', word_validity: 'valid', word_frequency: 'high'},
+    {word: 'caxdy', word_validity: 'invalid', word_frequency: 'undefined'},
+    {word: 'hippo', word_validity: 'valid', word_frequency: 'low'},
+    {word: 'hitpo', word_validity: 'invalid', word_frequency: undefined},
+  ];
+
+  var stimuliAccuracy = [
+    {word: 'happy', word_validity: 'valid', word_frequency: 'high'},
+    {word: 'halpy', word_validity: 'invalid', word_frequency: undefined},
+    {word: 'perky', word_validity: 'valid', word_frequency: 'low'},
+    {word: 'perkn', word_validity: 'invalid', word_frequency: undefined},
+  ];
+}
+
+
+
 
 
 
@@ -373,12 +446,6 @@ if(random > .5){
 */
 
 
-var stimuliSpeed = [
-  {word: 'happy', word_validity: 'valid', word_frequency: 'high'},
-  {word: 'halpy', word_validity: 'valid', word_frequency: 'low'},
-  {word: 'perky', word_validity: 'invalid', word_frequency: undefined},
-  {word: 'perkn', word_validity: 'invalid', word_frequency: undefined},
-];
 
 var trialsSpeed = {
   timeline_variables: stimuliSpeed,
@@ -407,6 +474,8 @@ var trialsSpeed = {
           var correct = data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode('j');
         }
         data.correct = correct;
+        data.trialN = trial_count;
+        trial_count++;
       }
     }
   ]
@@ -426,16 +495,6 @@ var instructionsAccuracy = {
 timeline.push(instructionsAccuracy);
 
 
-
-
-
-var stimuliAccuracy = [
-
-  {word: 'candy', word_validity: 'valid', word_frequency: 'high'},
-  {word: 'hippo', word_validity: 'valid', word_frequency: 'low'},
-  {word: 'caxdy', word_validity: 'invalid', word_frequency: undefined},
-  {word: 'hitpo', word_validity: 'invalid', word_frequency: undefined},
-];
 
 
 
@@ -470,6 +529,8 @@ var trialsAccuracy = {
           var correct = data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode('j');
         }
         data.correct = correct;
+        data.trialN = trial_count;
+        trial_count++;
       }
     }
   ]
